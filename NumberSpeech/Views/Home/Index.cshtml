@@ -6,6 +6,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            var available_voices = window.speechSynthesis.getVoices();
+
+            // this will hold an english voice
+            var english_voice = '';
+
+            // find voice by language locale "en-US"
+            // if not then select the first voice
+            for (var i = 0; i < available_voices.length; i++) {
+                if (available_voices[i].lang === 'en-US') {
+                    english_voice = available_voices[i];
+                    break;
+                }
+            }
+            if (english_voice === '')
+                english_voice = available_voices[0];
+
             $("#btnPronounce").click(function () {
                 $.get("/Home/NumberToText", { number: $("#txtNumber").val() }, function (data) {
                     textToSpeech(data);
@@ -13,22 +29,6 @@
                 });
             });
             function textToSpeech(text) {
-                var available_voices = window.speechSynthesis.getVoices();
-
-                // this will hold an english voice
-                var english_voice = '';
-
-                // find voice by language locale "en-US"
-                // if not then select the first voice
-                for (var i = 0; i < available_voices.length; i++) {
-                    if (available_voices[i].lang === 'en-US') {
-                        english_voice = available_voices[i];
-                        break;
-                    }
-                }
-                if (english_voice === '')
-                    english_voice = available_voices[0];
-
                 var utter = new SpeechSynthesisUtterance();
                 utter.rate = 1;
                 utter.pitch = 0.5;
