@@ -23,7 +23,12 @@
                 english_voice = available_voices[0];
 
             $("#btnPronounce").click(function () {
-                $.get("/Home/NumberToText", { number: $("#txtNumber").val() }, function (data) {
+                var numberVal = $("#txtNumber").val();
+                if (numberVal.split(".").length > 1) {
+                    $('#lblConvertedText').text("Please enter whole number");
+                    return;
+                }
+                $.get("/Home/NumberToText", { number: parseInt(numberVal) }, function (data) {
                     textToSpeech(data);
                     $('#lblConvertedText').text(data);
                 });
