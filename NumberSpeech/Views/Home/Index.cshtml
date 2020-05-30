@@ -7,4 +7,14 @@
     <input type="button" id="btnPronounce" value="Pronounce" />
     <br />
     <label id="lblConvertedText"></label>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnPronounce").click(function () {
+                $.get("/Home/NumberToText", { number: $("#txtNumber").val() }, function (data) {
+                    $('#lblConvertedText').text(data);
+                });
+            });
+        })
+    </script>
 </div>

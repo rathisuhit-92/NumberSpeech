@@ -15,6 +15,11 @@ namespace NumberSpeech.Controllers
             return View();
         }
 
+        public string NumberToText(string number)
+        {
+            return number;
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
