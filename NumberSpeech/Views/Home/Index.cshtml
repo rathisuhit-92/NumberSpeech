@@ -11,6 +11,14 @@
                     $('#lblConvertedText').text(data);
                 });
             });
+            function textToSpeech(text) {
+                var utter = new SpeechSynthesisUtterance();
+                utter.rate = 1;
+                utter.pitch = 0.5;
+                utter.text = text;
+                utter.voice = english_voice;
+                window.speechSynthesis.speak(utter);
+            }
         })
     </script>
 </div>
